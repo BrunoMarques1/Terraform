@@ -1,6 +1,6 @@
 resource "aws_security_group" "ec2_sg" { 
   name = "ec2_sg"
-  vpc_id = module.vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   ingress {
     protocol  = "TCP"
@@ -8,7 +8,7 @@ resource "aws_security_group" "ec2_sg" {
     to_port   = 22
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
+    ingress {
     protocol  = "TCP"
     from_port = 111
     to_port   = 111
