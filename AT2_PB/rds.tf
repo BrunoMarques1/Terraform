@@ -28,12 +28,3 @@
 #
 #  performance_insights_enabled = false
 #}
-
-module "rds1" {
-  source  = "./modulos/rds"
-  db_name = "wordpress01"
-}
-module "rds2" {
-  source  = "./modulos/rds"
-  db_name = "wordpress02"
-}

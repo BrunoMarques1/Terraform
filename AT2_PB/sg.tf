@@ -1,7 +1,6 @@
 resource "aws_security_group" "efs_sg" { 
   name = "efs_sg"
-  vpc_id = aws_vpc.vpc.id
-
+  vpc_id = module.vpc.id
 
   ingress {
     protocol  = "TCP"
@@ -19,8 +18,7 @@ resource "aws_security_group" "efs_sg" {
 
 resource "aws_security_group" "bastion_host_sg" { 
   name = "bastion_host_sg"
-  vpc_id = aws_vpc.vpc.id
-
+  vpc_id = module.vpc.id
 
   ingress {
     protocol  = "TCP"
@@ -38,14 +36,13 @@ resource "aws_security_group" "bastion_host_sg" {
 
 resource "aws_security_group" "docker_wordpress_sg" { 
   name = "docker_wordpress_sg"
-  vpc_id = aws_vpc.vpc.id
-
+  vpc_id = module.vpc.id
 
   ingress {
     protocol  = "TCP"
     from_port = 22
     to_port   = 22
-    cidr_blocks = ["${aws_instance.Bastion-Host.private_ip}/32"]
+    cidr_blocks = ["${module.bastion_host.private_ip}/32"]
   }
   ingress {
     protocol  = "TCP"
@@ -69,8 +66,7 @@ resource "aws_security_group" "docker_wordpress_sg" {
 
 resource "aws_security_group" "rds_sg" { 
   name = "rds_sg"
-  vpc_id = aws_vpc.vpc.id
-
+  vpc_id = module.vpc.id
 
   ingress {
     protocol  = "TCP"
@@ -88,8 +84,7 @@ resource "aws_security_group" "rds_sg" {
 
 resource "aws_security_group" "load_balance_sg" { 
   name = "load_balance_sg"
-  vpc_id = aws_vpc.vpc.id
-
+  vpc_id = module.vpc.id
 
   ingress {
     protocol  = "TCP"

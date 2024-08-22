@@ -10,8 +10,6 @@ module "public_subnet01" {
   availability_zone = "us-east-1a"
 }
 
-
-
 resource "aws_internet_gateway" "igw" {
   vpc_id = module.vpc.id
 

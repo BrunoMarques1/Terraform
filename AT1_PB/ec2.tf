@@ -4,7 +4,7 @@ module "ec2_01"{
   instance_name = "Web_Server_Apache"
   ami = "ami-0dfdffe179243455b"
   subnet_id       = module.public_subnet01.id
-  security_groups = [aws_security_group.ec2_sg.id]
+  security_groups = [module.apache_server_sg.id]
   
   user_data = templatefile("${path.module}/script.sh.tpl", {
     efs_ip = aws_efs_mount_target.mount_target.ip_address
